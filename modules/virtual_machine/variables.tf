@@ -17,7 +17,7 @@ variable "image_offer" {
   default = "UbuntuServer"
 }
 variable "image_sku" {
-  default = "22_04-lts-gen2"
+  default = "19_04-gen2"
 }
 variable "image_version" {
   default = "latest"
