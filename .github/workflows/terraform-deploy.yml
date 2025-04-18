@@ -1,0 +1,48 @@
+name: Azure Terraform Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment (dev, test, prod)'
+        required: true
+        default: 'dev'
+
+jobs:
+  terraform-deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set environment-specific directory
+      run: echo "ENV_DIR=envs/${{ github.event.inputs.environment }}" >> $GITHUB_ENV
+
+    - name: Install Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: 1.7.5
+
+    - name: Terraform Init
+      run: terraform init
+      working-directory: ${{ env.ENV_DIR }}
+
+    - name: Terraform Validate
+      run: terraform validate
+      working-directory: ${{ env.ENV_DIR }}
+
+    - name: Terraform Plan
+      run: terraform plan -out=tfplan -var-file="terraform.tfvars"
+      working-directory: ${{ env.ENV_DIR }}
+
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/main'
+      run: terraform apply -auto-approve tfplan
+      working-directory: ${{ env.ENV_DIR }}
