@@ -39,7 +39,7 @@ jobs:
           -var "location=${{ secrets.LOCATION }}" \
           -var 'vnet_address_space=${{ secrets.VNET_ADDRESS_SPACE }}' \
           -var 'subnet_address_space=${{ secrets.SUBNET_ADDRESS_SPACE }}' \
-          -var 'default_tags=${{ secrets.DEFAULT_TAGS }}'
+          -var 'default_tags=${{ secrets.DEFAULT_TAGS_JSON }}'
         working-directory: ${{ env.ENV_DIR }}
         env:
           ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
