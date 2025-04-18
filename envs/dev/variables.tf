@@ -14,9 +14,6 @@ variable "location" {
 variable "vnet_address_space" {
   type = list(string)
 }
-variable "subnet_address_space" {
-  type = list(string)
-}
 
 variable "default_tags" {
   type = map(string)
