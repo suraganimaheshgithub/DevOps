@@ -1,0 +1,36 @@
+# Local .terraform directories
+.terraform/
+
+
+# Terraform plan output
+*.tfplan
+*.tfstate
+*.tfstate.backup
+*.tfvars
+*.tfvars.json
+
+# Crash logs
+crash.log
+
+# Override files (used for local testing)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# .terraform.lock.hcl can be committed if you want exact provider versions
+# Otherwise, uncomment to ignore
+# .terraform.lock.hcl
+
+# IDE files
+.vscode/
+.idea/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+**/.terraform/*
+
