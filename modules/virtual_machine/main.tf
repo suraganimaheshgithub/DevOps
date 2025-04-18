@@ -1,10 +1,12 @@
+
 resource "azurerm_public_ip" "vm_ip" {
-  name                = "${var.name_prefix}-vm-ip-${var.env}"
+  name                = "${var.name_prefix}-public-ip-${var.env}"
   location            = var.location
   resource_group_name = var.resource_group_name
-  allocation_method   = "Dynamic"
-  tags                = var.tags
+  allocation_method   = "Static"  
+  sku                 = "Standard"
 }
+
 
 resource "azurerm_network_interface" "vm_nic" {
   name                = "${var.name_prefix}-nic-${var.env}"

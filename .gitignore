@@ -20,7 +20,7 @@ override.tf.json
 
 # .terraform.lock.hcl can be committed if you want exact provider versions
 # Otherwise, uncomment to ignore
-# .terraform.lock.hcl
+ .terraform.lock.hcl
 
 # IDE files
 .vscode/
